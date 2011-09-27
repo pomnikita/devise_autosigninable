@@ -12,7 +12,6 @@ module Devise
 #         indicator to expire autosignin token
         mattr_accessor :autosignin_expire
         @@autosignin_expire = false
-          
         end
       end
 
@@ -70,7 +69,7 @@ module Devise
 
 
       module ClassMethods
-        
+
         RETRY_COUNT = 20
 
         # Generate autosignin tokens unless already exists and save the records.
@@ -104,7 +103,7 @@ module Devise
 
         # Authenticate a user based on authentication token.
         def authenticate_with_autosignin_token(attributes={})
-          resource = find_by_id(attributes[self.to_s.foreign_key.to_sym])
+          resource = find_by_id(attributes[self.to_s.foreign_key.to_sym].to_i)
           if resource.try(:valid_for_autosignin_token_authentication?, attributes)
             resource
           else
