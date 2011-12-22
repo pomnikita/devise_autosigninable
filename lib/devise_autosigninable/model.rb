@@ -63,7 +63,7 @@ module Devise
           end
         end
         reset_autosignin_token! if self.class.autosignin_expire
-        save(false) if changed?
+        save(:validate => false) if changed?
         result
       end
 
