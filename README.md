@@ -18,7 +18,7 @@ Installation
 
 * Add devise_autosigninable to Gemfile:
 
-    `gem 'devise_autosigininable', '1.0.0'`
+    `gem 'devise_autosigninable', '1.0.0'`
 
 * Add :autosigninable to your Devise modules in model, for example:
 
