@@ -1,8 +1,8 @@
-class Devise::AutosigninController < ApplicationController
-  
-  include Devise::Controllers::InternalHelpers
+class Devise::AutosigninController < DeviseController
+
+  include Devise::Controllers::Helpers
   include Devise::Autosigninable::Helpers
-  
+
   def create
     sign_out(resource_name)
     if resource = warden.authenticate!(:scope => resource_name)
@@ -12,4 +12,5 @@ class Devise::AutosigninController < ApplicationController
     end
     sign_in_and_redirect_to_url(resource, params[:return_to])    
   end
+
 end
