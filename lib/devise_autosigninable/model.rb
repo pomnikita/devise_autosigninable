@@ -1,7 +1,6 @@
 module Devise
   module Models
     module Autosigninable
-#      include Devise::Models::Lockable
 
       def self.included(base)
         base.extend ClassMethods
@@ -9,9 +8,9 @@ module Devise
         base.class_eval do
           before_create :reset_autosignin_token
 
-#         indicator to expire autosignin token
-        mattr_accessor :autosignin_expire
-        @@autosignin_expire = false
+          # Indicator: expire autosignin token.
+          mattr_accessor :autosignin_expire
+          @@autosignin_expire = false
         end
       end
 
@@ -67,15 +66,16 @@ module Devise
         result
       end
 
-
       module ClassMethods
 
         RETRY_COUNT = 20
 
         # Generate autosignin tokens unless already exists and save the records.
         def ensure_all_autosignin_tokens(batch_size=500)
-          user_count = count( :conditions=>{:autosignin_token => nil})
-          find_in_batches(:batch_size =>batch_size, :conditions=>{:autosignin_token => nil}) do |group|
+          user_count = count(:conditions => { :autosignin_token => nil })
+          find_in_batches(:batch_size => batch_size,
+                          :conditions => {
+                            :autosignin_token => nil }) do |group|
             group.each { |user| user.ensure_autosignin_token! }
           end
         end
@@ -83,7 +83,7 @@ module Devise
         # Generate autosignin tokens and save the records.
         def reset_all_autosignin_tokens(batch_size=500)
           user_count = count
-          find_in_batches(:batch_size =>batch_size) do |group|
+          find_in_batches(:batch_size => batch_size) do |group|
             group.each { |user| user.reset_autosignin_token! }
           end
         end

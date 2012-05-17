@@ -12,7 +12,6 @@ else
   
 end
 
-
 Devise.add_module :autosigninable,
   :strategy => true,
   :controller => :autosignin,
@@ -20,6 +19,5 @@ Devise.add_module :autosigninable,
   :route => :autosigninable
 
 require 'devise_autosigninable/routes'
-require 'devise_autosigninable/schema'
 require 'devise_autosigninable/view_helpers'
 require 'devise_autosigninable/strategy'
